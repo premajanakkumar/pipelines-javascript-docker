@@ -39,3 +39,28 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
+- stage: Trivy Install
+  displayName: Installing trivy 
+  jobs:
+  - job: Trivy
+    displayName: Trivy installation
+    pool: $(vmImageName)
+    steps:
+    - task: CmdLine@2
+      displayName: "Download and install Trivy"
+      inputs:
+        script: |
+          sudo apt-get install rpm
+          wget https://github.com/aquasecurity/trivy/releases/download/v$(trivyVersion)/trivy_$(trivyVersion)_Linux-64bit.deb
+          sudo dpkg -i trivy_$(trivyVersion)_Linux-64bit.deb
+          trivy -v  
+    - task: CmdLine@2
+      displayName: Scan
+      inputs:
+        script: |
+                trivy image --exit-code 0 --severity CRITICAL,MEDIUM,HIGH $(containerRegistry)/$(imageRepository):$(tag)
+
+
+
+    
+          
