@@ -39,7 +39,7 @@ stages:
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
-- stage: Trivy Install
+- stage: TrivyInstall
   displayName: Installing trivy 
   jobs:
   - job: Trivy
