@@ -12,7 +12,7 @@ variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: 'afcf84f3-ec00-4265-bd46-2b8b6c98179a'
   imageRepository: 'premajanakkumarpipelinesjavascriptdocker'
-  containerRegistry: 'testprema.azurecr.io'
+  containerRegistry: 'testazureprema.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/app/Dockerfile'
   tag: '$(Build.BuildId)'
  
